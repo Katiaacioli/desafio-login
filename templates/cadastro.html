@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('{% static "images/background.jpg" %}') no-repeat center center/cover;
+        }
+
+        .register-container {
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            color: white;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .input-group .icon {
+            color: white;
+            padding-right: 10px;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            background: transparent;
+            color: white;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .toggle-password {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+
+        .toggle-password:hover {
+            text-decoration: none;
+        }
+
+        button {
+            background: white;
+            color: #6a11cb;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #f0f0f0;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Cadastro Fidelity Pesquisas</h2>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <span class="icon">👤</span>
+                <input type="text" name="name" placeholder="Nome Completo" required>
+            </div>
+
+            <div class="input-group">
+                <span class="icon">📧</span>
+                <input type="email" name="email" placeholder="E-mail" required>
+            </div>
+
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password" name="password" id="password" placeholder="Senha" required>
+            </div>
+            <button type="button" class="toggle-password" onclick="togglePassword('password')">👁 Mostrar senha</button>
+
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar Senha" required>
+            </div>
+            <button type="button" class="toggle-password" onclick="togglePassword('confirm_password')">👁 Mostrar senha</button>
+
+            <button type="submit">Cadastrar</button>
+            <p>Já tem uma conta? <a href="{% url 'login' %}">Entre aqui</a></p>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+</body>
+</html>
