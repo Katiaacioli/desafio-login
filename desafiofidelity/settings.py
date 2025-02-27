@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_3(7sa0qpe=fct-273fpd2$0viktflf6i756_pecu%$%e&wn97
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['desafio-login-produção-8abb.up.railway.app']
+ALLOWED_HOSTS = ['https://desafio-login-iagl.onrender.com','127.0.0.1']
 
 
 # Application definition
